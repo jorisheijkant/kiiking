@@ -1,0 +1,49 @@
+---
+import { languages, getLocalePath, type Lang } from '../i18n/ui';
+
+const currentLang = (Astro.currentLocale ?? 'en') as Lang;
+const currentPath = Astro.url.pathname;
+---
+
+<div class="lang-picker">
+	{Object.entries(languages).map(([code, label]) => (
+		<a
+			href={getLocalePath(code as Lang, currentPath)}
+			class={currentLang === code ? 'active' : ''}
+			data-lang={code}
+		>
+			{code.toUpperCase()}
+		</a>
+	))}
+</div>
+
+<script>
+	document.querySelectorAll<HTMLAnchorElement>('.lang-picker a').forEach((a) => {
+		a.addEventListener('click', () => {
+			localStorage.setItem('lang', a.dataset.lang!);
+		});
+	});
+</script>
+
+<style>
+	.lang-picker {
+		display: flex;
+		gap: 0.25rem;
+	}
+	.lang-picker a {
+		font-size: 0.8em;
+		font-weight: 600;
+		padding: 0.25rem 0.4rem;
+		border-radius: 4px;
+		text-decoration: none;
+		color: var(--black);
+		border: 1px solid transparent;
+	}
+	.lang-picker a.active {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+	.lang-picker a:hover:not(.active) {
+		border-color: #ccc;
+	}
+</style>

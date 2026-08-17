@@ -1,16 +1,16 @@
 ---
 import { getEntry, render } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_TITLE } from '../consts';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
 
-const entry = await getEntry('pages', 'et/home');
+const entry = await getEntry('pages', 'ru/home');
 const { Content } = await render(entry);
 ---
 
 <!doctype html>
-<html lang="et">
+<html lang="ru">
 	<head>
 		<BaseHead title={SITE_TITLE} description={entry.data.description ?? ''} />
 	</head>

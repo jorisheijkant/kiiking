@@ -56,3 +56,35 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<!-- Language auto-detection -->
+<script is:inline>
+	(function () {
+		var SUPPORTED = ['en', 'et', 'ru'];
+		var DEFAULT = 'et';
+
+		function getCurrentLang() {
+			var seg = window.location.pathname.split('/')[1];
+			return SUPPORTED.includes(seg) ? seg : DEFAULT;
+		}
+
+		var saved = localStorage.getItem('lang');
+		var target = saved && SUPPORTED.includes(saved)
+			? saved
+			: (function () {
+					var lang = (navigator.language || '').slice(0, 2).toLowerCase();
+					return SUPPORTED.includes(lang) ? lang : DEFAULT;
+				})();
+
+		var current = getCurrentLang();
+		if (current !== target) {
+			var path = window.location.pathname;
+			var withoutLocale = path.replace(/^\/(en|ru)/, '') || '/';
+			var newPath =
+				target === DEFAULT
+					? withoutLocale
+					: '/' + target + (withoutLocale === '/' ? '/' : withoutLocale);
+			window.location.replace(newPath);
+		}
+	})();
+</script>

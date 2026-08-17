@@ -1,23 +1,23 @@
 ---
-import { getEntry, render } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE } from '../consts';
+import { useTranslations } from '../i18n/ui';
 
-const entry = await getEntry('pages', 'et/home');
-const { Content } = await render(entry);
+const t = useTranslations('et');
 ---
 
 <!doctype html>
 <html lang="et">
 	<head>
-		<BaseHead title={SITE_TITLE} description={entry.data.description ?? ''} />
+		<BaseHead title={`Contact | ${SITE_TITLE}`} description="Get in touch" />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<Content />
+			<h1>{t('nav.contact')}</h1>
+			<p>{t('contact.text')} <a href="mailto:info@kiiking.com">info@kiiking.com</a></p>
 		</main>
 		<Footer />
 	</body>

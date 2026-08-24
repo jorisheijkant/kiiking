@@ -1,5 +1,4 @@
 ---
-import { SITE_TITLE } from '../consts';
 import { useTranslations, getLocalePath, type Lang } from '../i18n/ui';
 import HeaderLink from './HeaderLink.astro';
 import LanguagePicker from './LanguagePicker.astro';
@@ -11,7 +10,6 @@ const prefix = lang === 'et' ? '' : `/${lang}`;
 
 <header>
 	<nav>
-		<h2><a href={`${prefix}/`}>{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href={`${prefix}/`}>{t('nav.home')}</HeaderLink>
 			<HeaderLink href={`${prefix}/contact`}>{t('nav.contact')}</HeaderLink>

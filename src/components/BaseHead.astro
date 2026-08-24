@@ -60,7 +60,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Language auto-detection -->
 <script is:inline>
 	(function () {
-		var SUPPORTED = ['en', 'et', 'ru'];
+		var SUPPORTED = ['en', 'et'];
 		var DEFAULT = 'et';
 
 		function getCurrentLang() {
@@ -79,7 +79,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 		var current = getCurrentLang();
 		if (current !== target) {
 			var path = window.location.pathname;
-			var withoutLocale = path.replace(/^\/(en|ru)/, '') || '/';
+			var withoutLocale = path.replace(/^\/(en)/, '') || '/';
 			var newPath =
 				target === DEFAULT
 					? withoutLocale

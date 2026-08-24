@@ -1,7 +1,6 @@
 export const languages = {
 	et: 'Eesti',
 	en: 'English',
-	ru: 'Русский',
 } as const;
 
 export type Lang = keyof typeof languages;
@@ -20,12 +19,6 @@ export const ui = {
 		'nav.facebook': 'Jälgi meid Facebookis',
 		'contact.text': 'Võite meiega ühendust võtta aadressil',
 	},
-	ru: {
-		'nav.home': 'Главная',
-		'nav.contact': 'Контакты',
-		'nav.facebook': 'Следите за нами в Facebook',
-		'contact.text': 'Вы можете связаться с нами по адресу',
-	},
 } satisfies Record<Lang, Record<string, string>>;
 
 export function useTranslations(lang: Lang) {
@@ -35,7 +28,7 @@ export function useTranslations(lang: Lang) {
 }
 
 export function getLocalePath(targetLang: Lang, currentPath: string) {
-	const withoutLocale = currentPath.replace(/^\/(en|ru)/, '') || '/';
+	const withoutLocale = currentPath.replace(/^\/(en)/, '') || '/';
 	if (targetLang === defaultLang) return withoutLocale;
 	return `/${targetLang}${withoutLocale === '/' ? '/' : withoutLocale}`;
 }
